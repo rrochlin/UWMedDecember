@@ -2,11 +2,15 @@ import pandas as pd
 import os
 import glob
 
+
+# cleanUp takes sensor data in .txt format and transfers it to .csv format whil removing null timestamps and
+# correcting for user specified time errors in hours.
+# cutoff: str, formatted according to pandas datetime standards. Will cutoff all data before this time
+# timeRectifyingParams: dictionary, input dictionary with {condition1:hours to adjust} format in {str:int} datatype
+# filePaths: iterable with the correct filepaths to look for
+
 def cleanUp(cutoff,timeRectifyingParams,filePaths,columns):
-    # cutoff: str, formatted according to pandas datetime standards. Will cutoff all data before this time
-    # timeRectifyingParams: dictionary, input dictionary with {condition1:hours to adjust} format in {str:int} datatype
-    # filePaths: iterable with the correct filepaths to look for
-    
+
     fData = {}
     cleaningCutOffTime = pd.Timestamp(cutoff)
     for idx,x in enumerate(filePaths):
@@ -50,7 +54,7 @@ def cleanUp(cutoff,timeRectifyingParams,filePaths,columns):
         # ends by printing out the new start and stop times of the data sets
     for x in fData:
         try:
-            print(x,'   ',data[x]['Date_Time'].iloc[0],'    ',data[x]['Date_Time'].iloc[-1])
+            print(x,'   ',fData[x]['Date_Time'].iloc[0],'    ',fData[x]['Date_Time'].iloc[-1])
         except:
             print(x,' NO DATA PRESENT    NO DATA PRESENT')
     return fData
