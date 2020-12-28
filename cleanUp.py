@@ -1,6 +1,4 @@
 import pandas as pd
-import os
-import glob
 
 
 # cleanUp takes sensor data in .txt format and transfers it to .csv format whil removing null timestamps and
