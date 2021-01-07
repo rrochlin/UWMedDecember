@@ -11,7 +11,7 @@ def fillDf(df, freq, start, end, cutoff):
     if end:
         endTime = pd.Timestamp(end)
     else:
-        endTime = df.values[-1][0] + pd.Timedelta(seconds=10)
+        endTime = df.values[-1][0] + pd.Timedelta(seconds=freq)
 
     volatility = 0
     padding = 0
